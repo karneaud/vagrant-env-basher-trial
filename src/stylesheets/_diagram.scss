@@ -1,0 +1,38 @@
+#mia {
+    position: absolute;
+    width:auto;
+    left:50%;
+    top:0;
+    height:auto;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    user-select:none;
+    border: 2px dashed #efefef;
+    border-radius: 12px;
+}
+#frame {
+    width:150px;
+    height:434.93px;
+    position: relative;
+    margin: 0 auto;
+    img {
+        width: 100%;
+        height: auto;
+    }
+    &, div {
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: contain;
+    }
+
+    div {
+        width:100%;
+        position: absolute;
+        top:0;
+        left:0;
+        height:100%;
+        bottom:0;
+    }
+}

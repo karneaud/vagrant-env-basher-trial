@@ -1,0 +1,21 @@
+$primary-color: #009688;
+$accent-color: #212B40;
+$text-color: rgba(0, 0, 0, .87);
+$secondary-color: rgba(0, 0, 0, .54);
+$disabled-color: rgba(0, 0, 0, .38);
+$hint-color: rgba(0, 0, 0, .38);
+$icon-color: rgba(0, 0, 0, .38);
+$active-color: rgba(0, 0, 0, .54);
+$inactive-color: rgba(0, 0, 0, .38);
+$divider-color: rgba(0, 0, 0, .12);
+$basefont: "Lato";
+$slick-font-path: "//cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/fonts/" !default;
+$slick-font-family: "Ionicons" !default;
+$slick-loader-path: "//cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/" !default;
+// Typesetting variables. Edit these!
+$baseFontSize:22; // in pixels. This would result in 22px on desktop
+$baseLineHeight:1.5; // how large the line height is as a multiple of font size
+$leading:$baseLineHeight * 1rem;
+// Rate of growth for headings
+// I actually like this to be slightly smaller then the leading. Makes for tight headings.
+$scale:1.414;

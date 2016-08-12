@@ -1,8 +1,23 @@
 import Vue from 'vue'
-import App from './App'
+import resource from 'vue-resource'
+import router from 'vue-router'
+import App from './components/app'
 
-/* eslint-disable no-new */
-new Vue({
-  el: 'body',
-  components: { App }
+Vue.use(resource)
+Vue.use(router)
+
+const route = new router()
+
+// Pointing routes to the components they should use
+route.map({
+  '/app': {
+    component: App
+  }
 })
+
+// Any invalid route will redirect to home
+route.redirect({
+  '*': '/app'
+})
+
+route.start(App, '#section')

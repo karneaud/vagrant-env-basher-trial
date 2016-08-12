@@ -1,0 +1,76 @@
+.colour {
+  width: auto;
+  max-width: 150px;
+}
+
+.slider {
+    overflow-x: hidden;
+    img, .slick-slide div {
+      width:150px;
+      margin: 0 auto;
+    }
+
+    img[src*=none] {
+        border:1px dashed #ccc;
+    }
+}
+
+.slick-prev, .slick-next {
+  font-size:25px;
+  transform: translate(-50%, 0px);
+  width:25px;
+  height:auto;
+  z-index: 99;
+  &:before {
+    color: #666666;
+    font-size:4em;
+  }
+}
+
+.slick-next{
+    right:25px;
+
+    &:before {
+    content: "\f125";
+  }
+}
+
+.slick-prev {
+  left: 25px;
+  &:before {
+    content : "\f124";
+  }
+}
+
+.slidein-transition {
+    animation-duration: .51s;
+    animation-timing-function: ease;
+}
+
+.slidein-enter {
+    animation-name: slideIn;
+}
+
+.slidein-leave {
+  animation-name: slideOut;
+}
+
+@keyframes slideIn {
+  0% {
+    transform: translate(-100% , 0);
+  }
+
+  100% {
+    transform: translate(0,0);
+  }
+}
+
+@keyframes slideOut {
+  0% {
+      transform: translate(0,0);
+  }
+
+  100% {
+    transform: translate(-100%,0);
+  }
+}

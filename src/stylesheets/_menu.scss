@@ -1,0 +1,116 @@
+.outer_container{
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  top: 0;
+  left: 0;
+  margin:10px;
+}
+
+.menu_button{
+	position:absolute;
+  border-radius:50%;
+	@include square(64px);
+  background: white;
+	overflow:hidden;
+	z-index:9999;
+	outline:0;
+  left:0%;
+  font-size:2em;
+  line-height: 1.5em;
+  &:after {
+    content:"\f13d";
+    width:100%;
+    height:100%;
+    display: block;
+    position: absolute;
+    top:0;
+    left:0;
+    font-family: $slick-font-family;
+  }
+}
+.menu_option{
+	top: 5px;
+	left: 5px;
+	position: absolute;
+  margin: 0;
+  padding: 0;
+	li{
+		position:absolute;
+		display:block;
+		top: 0px;
+		left: 0px;
+		@include transition(.3s);
+		a{
+			position:relative;
+			display:block;
+			border-radius:50%;
+			@include square(32px);
+			border:1px solid #cdcdcd;
+      text-decoration: none;
+      overflow: hidden;
+      &:after {
+          width:100%;
+          height: 100%;
+          font-size:1.3em;
+          color:#a1a1a1;
+          display: block;
+          position: absolute;
+          left:0;
+          top:0;
+          font-family: $slick-font-family;
+      }
+			span {
+				background-attachment: scroll;
+				background-clip: border-box;
+				background-color: transparent;
+				background-origin: padding-box;
+				background-position: center center;
+				background-repeat: no-repeat;
+				display: block;
+				@include square(24px);
+        text-indent: -999em;
+				@include transition(.4s ease)
+
+			}
+		}
+	}
+}
+.btn-rotate span{
+	@include rotate(-135deg);
+}
+.active .menu_option li a{
+  @include animation(expand,.6s,ease,1,backwards);
+}
+
+#hair-menu-item:after {
+    content: "\f3ce";
+}
+
+#skin-menu-item::after {
+  content: "\f416";
+}
+
+#outer-top-menu-item::after {
+  content:"\f3a0";
+}
+
+#outer-bottom-menu-item::after {
+  content:"\f3e4";
+}
+
+#shoes-menu-item::after {
+  content:"\f3bb";
+}
+@-webkit-keyframes expand{
+	0%{top:0px}
+	50%{top:-10px}
+	70%{top:10px}
+	100%{top:0px}
+}
+@-moz-keyframes expand{
+	0%{top:0px}
+	50%{top:-10px}
+	70%{top:10px}
+	100%{top:0px}
+}
