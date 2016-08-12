@@ -43,7 +43,7 @@ Vagrant.configure(2) do |config|
     config.vm.synced_folder ".", "/home/vagrant/app", type: "rsync",
   rsync__exclude: [".git/","dist/",".gitignore","node_modules/", "Vagrantfile","*.md"],
   rsync__args: ["--update", "--archive", "--delete", "-z", "--copy-links", "--progress","-v"],
-  rsync__auto: false
+  rsync__auto: true
     ####
     ##
     ## Provider Configuration

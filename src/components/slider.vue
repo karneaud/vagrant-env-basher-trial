@@ -11,26 +11,20 @@ import outerBottom from './bottoms-outer'
 import shoes from './shoes'
 
 export default {
-  components : {
-    "skin-component": skin,
-    "shoes-component": shoes,
-    "hair-component" : hair,
-    "outer-top-component" : outerTop,
-    "outer-bottom-component" : outerBottom
+  components: {
+    'skin-component': skin,
+    'shoes-component': shoes,
+    'hair-component': hair,
+    'outer-top-component': outerTop,
+    'outer-bottom-component': outerBottom
   },
-  data() {
+  data () {
     return {
-      view : "skin-component",
+      view: 'skin-component'
     }
   },
-
-  events : {
-    "view-change" : function(view){
-        this.$set("view", view + "-component")
-    }
-  },
-  ready() {
-
+  events: {
+    'view-change': function (view) { this.$set('view', view + '-component') }
   }
 }
 </script>

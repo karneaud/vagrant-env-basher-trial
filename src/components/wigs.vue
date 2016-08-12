@@ -3,25 +3,25 @@
 import mix from '../libs/vue.mixin.js'
 
 export default {
-  props : {
+  props: {
     type: {
-      default: "set-hair"
+      default: 'set-hair'
     },
     urlPath: {
-      default: "src/assets/images/wigs/"
+      default: '/static/wigs/'
     }
   },
-  data() {
+  data () {
     return {
-      pieceId : "wigs",
-      pieces: ["hair00","hair01","hair02","hair03","hair04","hair05"]
+      pieceId: 'wigs',
+      pieces: ['hair00', 'hair01', 'hair02', 'hair03', 'hair04', 'hair05']
     }
   },
-  ready() {
+  ready () {
     this.gotoSlide(this.pieces.indexOf(this.$parent.$parent.hair))
   },
-  partials : {
-    wigs : '<div class="wig"><img :src="url(item)"/></div>'
+  partials: {
+    wigs: '<div class="wig"><img :src="url(item)"/></div>'
   },
   mixins: [mix]
 }

@@ -1,1 +1,1 @@
-import main from './stylesheets/application'
+import './stylesheets/application'
