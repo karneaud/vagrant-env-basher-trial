@@ -44,6 +44,10 @@ module.exports = {
       {
         test: /\.vue$/,
         loader: 'vue'
+      },{
+        test: /\.css$/,
+        loaders: ['style', 'css', 'sass', 'scss']
+        /* include: path.join(__dirname, 'src') */
       },
       {
         test: /\.js$/,
