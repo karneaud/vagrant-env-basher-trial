@@ -15,7 +15,7 @@ export default {
     }
   },
   partials: {
-    colours: '<div class="colour" :style="{ backgroundColor: item }"><a v-on:click.stop.prevent="pick(index)""><img src="/src/assets/images/thebody.png"/></a></div>'
+    colours: '<div class="colour" :style="{ backgroundColor: item }"><a v-on:click.stop.prevent="pick(index)"><img :src="background ()"/></a></div>'
   },
   ready () {
     this.gotoSlide(this.pieces.indexOf(this.$parent.$parent.colour))
@@ -23,6 +23,9 @@ export default {
   methods: {
     pick: function (i) {
       this.$dispatch('set-colour', this.pieces[i])
+    },
+    background: function () {
+      return require('../assets/thebody.png')
     }
   },
   mixins: [mix]

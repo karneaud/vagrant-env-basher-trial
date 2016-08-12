@@ -8,7 +8,7 @@ export default {
       default: 'set-shoes'
     },
     urlPath: {
-      default: 'src/assets/images/shoes/'
+      default: '/static/shoes/'
     }
   },
   data () {

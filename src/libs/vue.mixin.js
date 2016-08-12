@@ -26,7 +26,7 @@ export default {
       this.$dispatch(this.type, this.pieces[i])
     },
     url: function (item) {
-      let url = 'src/assets/images/none.png'
+      let url = '/static/none.png'
       if (item !== 'none') {
         url = this.urlPath + item + '.png'
       }
