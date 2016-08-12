@@ -7,11 +7,11 @@
       <div class="bottom"></div>
     </div>
     <div id="outer">
-      <div class="top" :style="{backgroundImage: url('/static/tops/outer/',outerTop) }"></div>
-      <div class="bottom" :style="{backgroundImage: url('/static/bottoms/outer/',outerBottom) }"></div>
+      <div class="top" :style="{backgroundImage: url('static/tops/outer/',outerTop) }"></div>
+      <div class="bottom" :style="{backgroundImage: url('static/bottoms/outer/',outerBottom) }"></div>
     </div>
-    <div id="shoes" :style="{backgroundImage: url('/static/shoes/', shoes) }"></div>
-    <div id="hair" :style="{backgroundImage: url('/static/wigs/', hair) }"></div>
+    <div id="shoes" :style="{backgroundImage: url('static/shoes/', shoes) }"></div>
+    <div id="hair" :style="{backgroundImage: url('static/wigs/', hair) }"></div>
   </div>
 </div>
 </template>
@@ -36,7 +36,7 @@ export default {
   },
   methods: {
     url: function (path, file) {
-      let url = '/static/none.png'
+      let url = 'static/none.png'
       if (file !== 'none') {
         url = path + file + '.png'
       }

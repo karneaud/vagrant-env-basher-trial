@@ -14,7 +14,7 @@ export default {
       default: 'set-outer-top'
     },
     urlPath: {
-      default: '/static/tops/outer/'
+      default: 'static/tops/outer/'
     }
   },
   ready () {

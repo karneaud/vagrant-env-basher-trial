@@ -8,7 +8,7 @@ export default {
       default: 'set-hair'
     },
     urlPath: {
-      default: '/static/wigs/'
+      default: 'static/wigs/'
     }
   },
   data () {

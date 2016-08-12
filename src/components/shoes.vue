@@ -8,7 +8,7 @@ export default {
       default: 'set-shoes'
     },
     urlPath: {
-      default: '/static/shoes/'
+      default: 'static/shoes/'
     }
   },
   data () {

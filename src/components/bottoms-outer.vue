@@ -13,7 +13,7 @@ export default {
     type: {
       default: 'set-outer-bottom'
     },
-    urlPath: { default: '/static/bottoms/outer/' }
+    urlPath: { default: 'static/bottoms/outer/' }
   },
   partials: {
     outerBottom: '<div class="outer-bottom"><img :src="url(item)"/></div>'
