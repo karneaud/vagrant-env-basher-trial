@@ -12,7 +12,7 @@
 # fork it and change the following to reflect your own copy
 gh_user   = "drmyersii"
 gh_repo   = "vagrant-env-basher"
-gh_branch = "master" # if you want to ensure consistency, use a specific tag (e.g. v0.1.0)
+gh_branch = "v0.10.0" # if you want to ensure consistency, use a specific tag (e.g. v0.1.0)
 gh_url    = "https://raw.githubusercontent.com/#{gh_user}/#{gh_repo}/#{gh_branch}"
 
 # path to provisioning scripts
@@ -38,12 +38,10 @@ Vagrant.configure(2) do |config|
     config.vm.box = "ubuntu/trusty64"
 
     # set up network configuration
-    config.vm.network :forwarded_port, guest: 10080,  host: 10080
-    # config.vm.network :forwarded_port, guest: 443, host: 10443
-    config.vm.synced_folder ".", "/vagrant", type: "rsync",
-    rsync__exclude: [".git/","dist/",".gitignore","node_modules/", "Vagrantfile","vendor/"],
-    rsync__args: ["--update", "--archive", "--delete", "-z", "--copy-links", "--progress","-v"],
-    rsync__auto: true
+    config.vm.network :forwarded_port, guest: 80,  host: 10080
+    config.vm.network :forwarded_port, guest: 443, host: 10443
+    config.vm.synced_folder ".", "/home/vagrant/app", type: "rsync", rsync__exclude: [".git/","dist/",".gitignore","node_modules/", "Vagrantfile","*.md","vendor/"], rsync__args: ["--update", "--archive", "--delete", "-z", "--copy-links", "--progress","-v"], rsync__auto: true
+
     ####
     ##
     ## Provider Configuration
@@ -125,7 +123,7 @@ Vagrant.configure(2) do |config|
         args_php_version = "5.6"
 
         # @param: (optional) list of php extensions to install, note: due to the new PPA, you will need to specify the version of php in the extension names as well
-        args_php_extensions = "php5.6-cli php5.6-mcrypt php5.6-fpm php5.6-mysql php5.6-gd"
+        args_php_extensions = "php5.6-cli php5.6-mcrypt php5.6-mysql php5.6-gd php5.6-cgi php5.6-fpm"
 
         # @param: (optional) user to run php-fpm as, note: if left blank, user will be left as default
         args_php_user = "vagrant"
@@ -145,7 +143,7 @@ Vagrant.configure(2) do |config|
         ####
 
         # @param: (optional) location to run `composer install`
-        args_composer_install_dir = "/vagrant"
+        args_composer_install_dir = "/home/vagrant/app"
 
         # call composer provisioner
         config.vm.provision :shell, privileged: false, path: "#{scripts_url}/composer", args: [ args_composer_install_dir ]
@@ -156,10 +154,10 @@ Vagrant.configure(2) do |config|
         ####
 
         # @param: path to the document root
-        args_nginx_document_root = "/vagrant/www"
+        args_nginx_document_root = "/home/vagrant/app"
 
         # @param: hostname of the application
-        args_nginx_hostname = "localdev"
+        args_nginx_hostname = "_"
 
         # @param: local ip address of the application
         args_nginx_ip_address = "0.0.0.0"
@@ -185,7 +183,7 @@ Vagrant.configure(2) do |config|
         args_node_packages = "npm pm2"
 
         # call node provisioner
-        # config.vm.provision :shell, privileged: false, path: "#{scripts_url}/node", args: [ args_node_version, args_node_packages ]
+        config.vm.provision :shell, privileged: false, path: "#{scripts_url}/node", args: [ args_node_version, args_node_packages ]
 
 
         ####
@@ -193,10 +191,10 @@ Vagrant.configure(2) do |config|
         ####
 
         # @param: (optional) location to run `npm install`
-        args_npm_install_dir = ""
+        args_npm_install_dir = "/home/vagrant/app"
 
         # call npm provisioner
-        # config.vm.provision :shell, privileged: false, path: "#{scripts_url}/npm", args: [ args_npm_install_dir ]
+        config.vm.provision :shell, privileged: false, path: "#{scripts_url}/npm", args: [ args_npm_install_dir ]
 
 
         ####
