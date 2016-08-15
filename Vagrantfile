@@ -39,11 +39,11 @@ Vagrant.configure(2) do |config|
 
     # set up network configuration
     config.vm.network :forwarded_port, guest: 10080,  host: 10080
-    config.vm.network :forwarded_port, guest: 443, host: 10443
-    config.vm.synced_folder ".", "/home/vagrant/app", type: "rsync",
-  rsync__exclude: [".git/","dist/",".gitignore","node_modules/", "Vagrantfile","*.md"],
-  rsync__args: ["--update", "--archive", "--delete", "-z", "--copy-links", "--progress","-v"],
-  rsync__auto: true
+    # config.vm.network :forwarded_port, guest: 443, host: 10443
+    config.vm.synced_folder ".", "/vagrant", type: "rsync",
+    rsync__exclude: [".git/","dist/",".gitignore","node_modules/", "Vagrantfile","vendor/"],
+    rsync__args: ["--update", "--archive", "--delete", "-z", "--copy-links", "--progress","-v"],
+    rsync__auto: true
     ####
     ##
     ## Provider Configuration
@@ -71,7 +71,7 @@ Vagrant.configure(2) do |config|
         ####
 
         # @param: (optional) list of system packages to install separated by spaces. E.g. "git curl screen"
-        args_base_packages = "git"
+        args_base_packages = "git zip unzip"
 
         # call base provisioner
         config.vm.provision :shell, privileged: false, path: "#{scripts_url}/base", args: [ args_base_packages ]
@@ -101,24 +101,31 @@ Vagrant.configure(2) do |config|
         ## postgresql
         ####
 
+        # @param: database name
+        args_postgresql_db_name = "dev"
+
+        # @param: database user to create
+        args_postgresql_db_user = "dev"
+
+        # @param: database user's password
+        args_postgresql_db_password = "dev"
+
+        # @param: allowed hostname for connection to new database
+        args_postgresql_db_host = "localhost"
+
         # call postgresql provisioner
-        # config.vm.provision :shell, privileged: false, path: "#{scripts_url}/postgresql", args: []
+        # config.vm.provision :shell, privileged: false, path: "#{scripts_url}/postgresql", args: [ args_postgresql_db_name, args_postgresql_db_user, args_postgresql_db_password, args_postgresql_db_host ]
 
 
         ####
         ## php
-        ##
-        ## - Specify any version of php >= 5.3. I recommend using 5.5 or 5.6
-        ##   since they don't need phpbrew to install
-        ## - If you are comfortable with phpbrew, you can also specify semantic
-        ##   versions (e.g. 5.4.40)
         ####
 
-        # @param: version of php to install
+        # @param: version of php to install (must be 5.5, 5.6, or 7.0)
         args_php_version = "5.6"
 
-        # @param: (optional) list of php packages to install, note: if using PhpBrew, make sure you use the available variants. E.g. "+default +fpm +gd". For more info, check the cookbook: https://github.com/phpbrew/phpbrew/wiki/Cookbook
-        args_php_package_list = "php5-mcrypt php5-fpm php5-mysql"
+        # @param: (optional) list of php extensions to install, note: due to the new PPA, you will need to specify the version of php in the extension names as well
+        args_php_extensions = "php5.6-cli php5.6-mcrypt php5.6-fpm php5.6-mysql php5.6-gd"
 
         # @param: (optional) user to run php-fpm as, note: if left blank, user will be left as default
         args_php_user = "vagrant"
@@ -130,7 +137,7 @@ Vagrant.configure(2) do |config|
         args_php_owner = "vagrant"
 
         # call php provisioner
-        # config.vm.provision :shell, privileged: false, path: "#{scripts_url}/php", args: [ args_php_version, args_php_package_list, args_php_user, args_php_group, args_php_owner ]
+        config.vm.provision :shell, privileged: false, path: "#{scripts_url}/php", args: [ args_php_version, args_php_extensions, args_php_user, args_php_group, args_php_owner ]
 
 
         ####
@@ -138,10 +145,10 @@ Vagrant.configure(2) do |config|
         ####
 
         # @param: (optional) location to run `composer install`
-        args_composer_install_dir = ""
+        args_composer_install_dir = "/vagrant"
 
         # call composer provisioner
-        # config.vm.provision :shell, privileged: false, path: "#{scripts_url}/composer", args: [ args_composer_install_dir ]
+        config.vm.provision :shell, privileged: false, path: "#{scripts_url}/composer", args: [ args_composer_install_dir ]
 
 
         ####
@@ -149,10 +156,10 @@ Vagrant.configure(2) do |config|
         ####
 
         # @param: path to the document root
-        args_nginx_document_root = "/vagrant/app"
+        args_nginx_document_root = "/vagrant/www"
 
         # @param: hostname of the application
-        args_nginx_hostname = "_"
+        args_nginx_hostname = "localdev"
 
         # @param: local ip address of the application
         args_nginx_ip_address = "0.0.0.0"
@@ -178,7 +185,7 @@ Vagrant.configure(2) do |config|
         args_node_packages = "npm pm2"
 
         # call node provisioner
-        config.vm.provision :shell, privileged: false, path: "#{scripts_url}/node", args: [ args_node_version, args_node_packages ]
+        # config.vm.provision :shell, privileged: false, path: "#{scripts_url}/node", args: [ args_node_version, args_node_packages ]
 
 
         ####
@@ -186,7 +193,7 @@ Vagrant.configure(2) do |config|
         ####
 
         # @param: (optional) location to run `npm install`
-        args_npm_install_dir = "/vagrant"
+        args_npm_install_dir = ""
 
         # call npm provisioner
         # config.vm.provision :shell, privileged: false, path: "#{scripts_url}/npm", args: [ args_npm_install_dir ]
@@ -204,4 +211,15 @@ Vagrant.configure(2) do |config|
 
         # call ruby provisioner
         # config.vm.provision :shell, privileged: false, path: "#{scripts_url}/ruby", args: [ args_ruby_version, args_ruby_package_list ]
+
+
+        ####
+        ## go
+        ####
+
+        # @param: version of go to install (e.g. 1.6).
+        args_go_version = "1.6"
+
+        # call go provisioner
+        # config.vm.provision :shell, privileged: false, path: "#{scripts_url}/go", args: [ args_go_version ]
 end

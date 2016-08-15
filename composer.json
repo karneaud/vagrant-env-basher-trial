@@ -1,0 +1,12 @@
+{
+  "name": "Mia Lime App",
+  "require": {
+    "aheinze/lime":"*",
+    "gregwar/image": "2.*"
+  },
+  "autoload": {
+        "psr-0": {
+            "Lime": "src/"
+        }
+    }
+}
